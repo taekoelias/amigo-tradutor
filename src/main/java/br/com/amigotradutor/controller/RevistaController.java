@@ -18,23 +18,23 @@ public class RevistaController {
 	@Autowired
 	private RevistaService service;
 	
-	@RequestMapping("/autores")
-	public List<Revista> getAllAutores(){
+	@RequestMapping("/revistas")
+	public List<Revista> getAllRevistas(){
 		return service.getAll();
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value="/autores")
+	@RequestMapping(method = RequestMethod.POST, value="/revistas")
 	public void addRevista(@RequestBody Revista revista){
 		service.add(revista);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value="/autores/{id}")
-	public void addTradutor(@PathVariable long id, @RequestBody Revista revista){
+	@RequestMapping(method = RequestMethod.PUT, value="/revistas/{id}")
+	public void updateRevista(@PathVariable long id, @RequestBody Revista revista){
 		service.update(revista);
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value="/autores/{id}")
-	public void addTradutor(@PathVariable long id){
+	@RequestMapping(method = RequestMethod.DELETE, value="/revistas/{id}")
+	public void removeRevista(@PathVariable long id){
 		service.delete(id);
 	}
 }

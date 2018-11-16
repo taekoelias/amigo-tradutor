@@ -29,12 +29,12 @@ public class AutorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/autores/{id}")
-	public void addTradutor(@PathVariable long id, @RequestBody Autor autor){
+	public void updateAutor(@PathVariable long id, @RequestBody Autor autor){
 		service.update(autor);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/autores/{id}")
-	public void addTradutor(@PathVariable long id){
+	public void removeAutor(@PathVariable long id){
 		service.delete(id);
 	}
 }

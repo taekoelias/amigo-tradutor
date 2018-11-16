@@ -54,7 +54,7 @@ public class TradutorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/usuarios/{usuarioId}/tradutores/{id}")
-	public void addTradutor(@PathVariable long usuarioId, @PathVariable long id, @RequestBody Tradutor tradutor){
+	public void updateTradutor(@PathVariable long usuarioId, @PathVariable long id, @RequestBody Tradutor tradutor){
 		if (tradutor.getOrigem().equals(tradutor.getDestino()))
 			throw new IllegalArgumentException("Não é possível cadastrar um tradutor com o mesmo idioma de origem e destino.");
 		
@@ -64,7 +64,7 @@ public class TradutorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/tradutores/{id}")
-	public void addTradutor(@PathVariable long id){
+	public void removeTradutor(@PathVariable long id){
 		service.delete(id);
 	}
 }
