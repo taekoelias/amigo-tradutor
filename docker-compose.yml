@@ -5,7 +5,7 @@ data:
   command: "/bin/sh"
 
 install:
-  image: localhost:5000/maven
+  image: maven
   volumes:
     - ./:/app
     - ~/.m2:/root/.m2
@@ -13,7 +13,7 @@ install:
   command: "mvn install"
 
 test:
-  image: localhost:5000/maven
+  image: maven
   volumes:
     - ./:/app
     - ~/.m2:/root/.m2
@@ -21,7 +21,7 @@ test:
   command: "mvn cobertura:cobertura test"
 
 server:
-  image: localhost:5000/maven
+  image: maven
   volumes:
     - ./:/app
     - ~/.m2:/root/.m2
@@ -31,15 +31,15 @@ server:
   command: "mvn spring-boot:run"
 
 package:
-  image: localhost:5000/maven
+  image: maven
   volumes:
     - ./:/app
     - ~/.m2:/root/.m2
   working_dir: /app
   command: "mvn package"
-  
+
 clean:
-  image: localhost:5000/maven
+  image: maven
   volumes:
     - ./:/app
     - ~/.m2:/root/.m2
