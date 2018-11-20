@@ -7,14 +7,33 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build') {
+        stage('check env') {
+            parallel {
+                stage('check mvn') {
+                    steps {
+                        sh 'mvn -v'
+                    }
+                }
+                stage('check java') {
+                    steps {
+                        sh 'java -version'
+                    }
+                }
+            }
+        }
+        stage('Package') {
             steps {
-                echo 'Building..'
+                sh 'mvn package -DskipTests'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh 'mvn test'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn install -DskipTests'
             }
         }
         stage('Deploy') {
