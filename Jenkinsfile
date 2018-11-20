@@ -1,45 +1,57 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('checkout project') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('check env') {
-            parallel {
-                stage('check mvn') {
-                    steps {
-                        sh 'mvn -v'
-                    }
-                }
-                stage('check java') {
-                    steps {
-                        sh 'java -version'
-                    }
-                }
-            }
-        }
-        stage('Package') {
-            steps {
-                sh 'mvn package -DskipTests'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn install -DskipTests'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+  agent any
+  stages {
+    stage('checkout project') {
+      steps {
+        checkout scm
+      }
     }
+    stage('test') {
+      steps {
+        sh 'docker-compose run test'
+      }
+    }
+    stage('report') {
+      parallel {
+        stage('report') {
+          steps {
+            junit 'target/surefire-reports/*.xml'
+          }
+        }
+        stage('coverage') {
+          steps {
+            cobertura(coberturaReportFile: 'target/site/cobertura/coverage.xml')
+          }
+        }
+      }
+    }
+    stage('package') {
+      steps {
+        sh 'docker-compose run package'
+      }
+    }
+    stage('archive') {
+      steps {
+        archiveArtifacts 'target/*.jar'
+      }
+    }
+    stage('deploy') {
+      steps {
+        echo 'TODO: adicionar passo de deploy'
+      }
+    }
+  }
+  post {
+    always {
+      sh 'docker-compose run clean'
+      echo 'I will always say Hello again!'
+    }
+    success {
+      echo 'success!'
+
+    }
+    failure {
+      echo 'failure!'
+    }
+  }
 }

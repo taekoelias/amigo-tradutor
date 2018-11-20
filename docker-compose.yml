@@ -1,0 +1,47 @@
+data:
+  image: alpine
+  volumes:
+    - ~/.m2:/root/.m2
+  command: "/bin/sh"
+
+install:
+  image: localhost:5000/maven
+  volumes:
+    - ./:/app
+    - ~/.m2:/root/.m2
+  working_dir: /app
+  command: "mvn install"
+
+test:
+  image: localhost:5000/maven
+  volumes:
+    - ./:/app
+    - ~/.m2:/root/.m2
+  working_dir: /app
+  command: "mvn cobertura:cobertura test"
+
+server:
+  image: localhost:5000/maven
+  volumes:
+    - ./:/app
+    - ~/.m2:/root/.m2
+  working_dir: /app
+  ports:
+   - "8000:8000"
+  command: "mvn spring-boot:run"
+
+package:
+  image: localhost:5000/maven
+  volumes:
+    - ./:/app
+    - ~/.m2:/root/.m2
+  working_dir: /app
+  command: "mvn package"
+  
+clean:
+  image: localhost:5000/maven
+  volumes:
+    - ./:/app
+    - ~/.m2:/root/.m2
+  working_dir: /app
+  command: "mvn clean" 
