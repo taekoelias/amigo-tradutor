@@ -2,3 +2,5 @@ target/
 .settings/
 .vscode/
 .project
+/.classpath
+/derby.log

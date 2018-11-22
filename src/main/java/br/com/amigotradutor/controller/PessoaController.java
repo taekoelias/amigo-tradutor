@@ -18,7 +18,7 @@ public class PessoaController {
 	private PessoaService service;
 	
 	@RequestMapping("/pessoas")
-	public List<Pessoa> getAllPessoas(Pessoa p){
+	public List<Pessoa> getAllPessoas(){
 		return service.getAllPessoa();
 	}
 	
