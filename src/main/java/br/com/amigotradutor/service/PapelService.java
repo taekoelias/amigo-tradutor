@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.amigotradutor.exception.EntidadeUnicaExistenteException;
+import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Papel;
 import br.com.amigotradutor.repository.interfaces.PapelRepository;
+import br.com.amigotradutor.validator.PapelValidator;
 
 @Service
 public class PapelService implements CrudService<Papel, Long> {
@@ -25,16 +28,38 @@ public class PapelService implements CrudService<Papel, Long> {
 		return repositorio.findOne(id);
 	}
 
-	public void add(Papel t) {
+	public void add(Papel p) throws ValidacaoNegocioException {
+		
+		PapelValidator validator = new PapelValidator(repositorio);
+		
+		validator.duplicated(p);
+		
+		long id = repositorio.nextId();
+		p.setId(id);
+		
+		p = repositorio.save(p);
 		
 	}
 
-	public void update(Papel t) {
+	public void update(Long id, Papel p) throws ValidacaoNegocioException {
 		
+		PapelValidator validator = new PapelValidator(repositorio);
+		
+		p.setId(id);
+
+		validator.notExists(id);
+		validator.duplicated(p);
+		
+		repositorio.save(p);
 	}
 
-	public void delete(Long t) {
+	public void delete(Long p) throws ValidacaoNegocioException {
 		
+		PapelValidator validator = new PapelValidator(repositorio);
+		
+		validator.notExists(p);
+		
+		repositorio.delete(p);
 	}
 
 }

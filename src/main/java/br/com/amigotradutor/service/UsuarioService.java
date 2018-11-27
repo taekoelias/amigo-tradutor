@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.amigotradutor.model.Papel;
 import br.com.amigotradutor.model.Usuario;
 import br.com.amigotradutor.model.UsuarioPapel;
-import br.com.amigotradutor.model.UsuarioPapelPK;
+import br.com.amigotradutor.model.UsuarioPapelId;
 import br.com.amigotradutor.repository.interfaces.UsuarioPapelRepository;
 import br.com.amigotradutor.repository.interfaces.UsuarioRepository;
 
@@ -57,7 +57,7 @@ public class UsuarioService {
 	}
 	
 	public void addPapelUsuario(Usuario u, Papel p){
-		UsuarioPapel up = usuarioPapelDao.findOne(new UsuarioPapelPK(u.getId(), p.getId()));
+		UsuarioPapel up = usuarioPapelDao.findOne(new UsuarioPapelId(u.getId(), p.getId()));
 		if (up == null){
 			up = new UsuarioPapel(u.getId(),p.getId());
 		} 

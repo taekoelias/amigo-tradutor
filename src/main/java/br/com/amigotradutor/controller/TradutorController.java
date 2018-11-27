@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.amigotradutor.model.Tradutor;
 import br.com.amigotradutor.model.Usuario;
+import br.com.amigotradutor.model.UsuarioPapel;
 import br.com.amigotradutor.service.TradutorService;
 
 @RestController
@@ -49,7 +50,7 @@ public class TradutorController {
 		if (tradutor.getOrigem().equals(tradutor.getDestino()))
 			throw new IllegalArgumentException("Não é possível cadastrar um tradutor com o mesmo idioma de origem e destino.");
 		
-		tradutor.setUsuario(new Usuario(usuarioId));
+		tradutor.setUsuarioPapel(new UsuarioPapel(usuarioId, 0));
 		service.add(tradutor);
 	}
 	
@@ -59,7 +60,7 @@ public class TradutorController {
 			throw new IllegalArgumentException("Não é possível cadastrar um tradutor com o mesmo idioma de origem e destino.");
 		
 		tradutor.setId(id);
-		tradutor.setUsuario(new Usuario(usuarioId));
+		tradutor.setUsuarioPapel(new UsuarioPapel(usuarioId, 0));
 		service.update(tradutor);
 	}
 	

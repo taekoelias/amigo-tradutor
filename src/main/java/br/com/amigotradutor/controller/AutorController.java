@@ -30,7 +30,7 @@ public class AutorController {
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/autores/{id}")
 	public void updateAutor(@PathVariable long id, @RequestBody Autor autor){
-		service.update(autor);
+		service.update(id, autor);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/autores/{id}")

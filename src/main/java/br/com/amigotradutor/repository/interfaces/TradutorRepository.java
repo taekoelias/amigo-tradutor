@@ -23,7 +23,7 @@ public interface TradutorRepository extends CrudRepository<Tradutor, Long> {
 	 * @param ativo
 	 * @return
 	 */
-	List<Tradutor> findByAtivoAndUsuarioId(boolean ativo, long usuarioId);
+	List<Tradutor> findByAtivoAndUsuarioPapelUsuarioPapelIdUsuarioId(boolean ativo, long usuarioId);
 	
 	/**
 	 * Retorna os {@link Tradutor} que possuem como {@link Idioma} de origem o informado
@@ -55,5 +55,5 @@ public interface TradutorRepository extends CrudRepository<Tradutor, Long> {
 	 * @param ativo
 	 * @return
 	 */
-	Tradutor findByUsuarioIdAndDestinoIdAndOrigemId(long usuarioId, long idiomaDestinoId, long idiomaOrigemId);
+	Tradutor findByUsuarioPapelUsuarioPapelIdUsuarioIdAndDestinoIdAndOrigemId(long usuarioId, long idiomaDestinoId, long idiomaOrigemId);
 }

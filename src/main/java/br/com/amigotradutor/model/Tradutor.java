@@ -6,21 +6,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints=@UniqueConstraint(columnNames={"idUsuario","idOrigem","idDestino"}))
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"usuarioId", "papelId","idOrigem","idDestino"}))
 public class Tradutor {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name="idUsuario", nullable=false)
-	private Usuario usuario;
+	@MapsId("usuarioPapelId")
+    @JoinColumns({
+        @JoinColumn(name="usuarioId", referencedColumnName="usuarioId"),
+        @JoinColumn(name="papelId", referencedColumnName="papelId")
+    })
+    @ManyToOne
+	private UsuarioPapel usuarioPapel;
 
 	@ManyToOne
 	@JoinColumn(name="idOrigem", nullable=false)
@@ -36,10 +42,10 @@ public class Tradutor {
 	public Tradutor() {
 	}
 
-	public Tradutor(long id, long usuario, long idiomaOrigem, long idiomaDestino, boolean ativo) {
+	public Tradutor(long id, long usuario, long papel, long idiomaOrigem, long idiomaDestino, boolean ativo) {
 		super();
 		this.id = id;
-		this.usuario = new Usuario(usuario);
+		this.usuarioPapel = new UsuarioPapel(usuario, papel);
 		this.origem = new Idioma(idiomaOrigem, null, null);
 		this.destino = new Idioma(idiomaDestino, null, null);
 		this.ativo = ativo;
@@ -51,14 +57,6 @@ public class Tradutor {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public Idioma getOrigem() {
@@ -83,6 +81,14 @@ public class Tradutor {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public UsuarioPapel getUsuarioPapel() {
+		return usuarioPapel;
+	}
+
+	public void setUsuarioPapel(UsuarioPapel usuarioPapel) {
+		this.usuarioPapel = usuarioPapel;
 	}
 	
 }

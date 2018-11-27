@@ -3,8 +3,8 @@ package br.com.amigotradutor.repository.interfaces;
 import org.springframework.data.repository.CrudRepository;
 
 import br.com.amigotradutor.model.UsuarioPapel;
-import br.com.amigotradutor.model.UsuarioPapelPK;
+import br.com.amigotradutor.model.UsuarioPapelId;
 
-public interface UsuarioPapelRepository extends CrudRepository<UsuarioPapel,UsuarioPapelPK> {
+public interface UsuarioPapelRepository extends CrudRepository<UsuarioPapel,UsuarioPapelId> {
 	
 }

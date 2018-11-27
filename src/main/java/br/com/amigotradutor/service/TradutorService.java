@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.amigotradutor.model.Papel;
 import br.com.amigotradutor.model.Tradutor;
-import br.com.amigotradutor.model.UsuarioPapelPK;
+import br.com.amigotradutor.model.Usuario;
+import br.com.amigotradutor.model.UsuarioPapelId;
 import br.com.amigotradutor.repository.interfaces.TradutorRepository;
 import br.com.amigotradutor.repository.interfaces.UsuarioPapelRepository;
 
@@ -33,7 +34,7 @@ public class TradutorService {
 	}
 	
 	public List<Tradutor> getAllTradutoresAtivosUsuario(long usuarioId){
-		return repository.findByAtivoAndUsuarioId(true, usuarioId);
+		return repository.findByAtivoAndUsuarioPapelUsuarioPapelIdUsuarioId(true, usuarioId);
 	}
 	
 	public List<Tradutor> getAllTradutoresIdiomaOrigemIdiomaDestino(long idiomaOrigem, long idiomaDestino){
@@ -50,10 +51,10 @@ public class TradutorService {
 	
 	public void add(Tradutor t){
 		
-		Tradutor tradutor = repository.findByUsuarioIdAndDestinoIdAndOrigemId(t.getUsuario().getId(), t.getDestino().getId(), t.getOrigem().getId());
+		Tradutor tradutor = repository.findByUsuarioPapelUsuarioPapelIdUsuarioIdAndDestinoIdAndOrigemId(t.getUsuarioPapel().getUsuarioPapelId().getUsuarioId(), t.getDestino().getId(), t.getOrigem().getId());
 		
 		if (tradutor == null){
-			usuarioService.addPapelTradutor(t.getUsuario());
+			usuarioService.addPapelTradutor(new Usuario(t.getUsuarioPapel().getUsuarioPapelId().getUsuarioId()));
 			t.setAtivo(true);
 			repository.save(t);
 		} else if (!tradutor.isAtivo()){
