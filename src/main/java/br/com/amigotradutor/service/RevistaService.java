@@ -26,7 +26,7 @@ public class RevistaService implements CrudService<Revista,Long>{
 		dao.save(a);
 	}
 	
-	public void update(Long id, Revista a){
+	public void update(Revista a){
 		dao.save(a);
 	}
 	

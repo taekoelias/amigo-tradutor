@@ -1,10 +1,7 @@
 package br.com.amigotradutor.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -33,9 +30,6 @@ public class Papel {
 	
 	private String descricao;
 	
-	@ManyToMany(mappedBy="papeis")
-	private List<Usuario> usuarios;
-	
 	public Papel() {
 	}
 
@@ -61,14 +55,6 @@ public class Papel {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
 	}
 	
 	@Override

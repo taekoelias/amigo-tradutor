@@ -54,7 +54,7 @@ public class TradutorService {
 		Tradutor tradutor = repository.findByUsuarioPapelUsuarioPapelIdUsuarioIdAndDestinoIdAndOrigemId(t.getUsuarioPapel().getUsuarioPapelId().getUsuarioId(), t.getDestino().getId(), t.getOrigem().getId());
 		
 		if (tradutor == null){
-			usuarioService.addPapelTradutor(new Usuario(t.getUsuarioPapel().getUsuarioPapelId().getUsuarioId()));
+			//usuarioService.addPapelTradutor(new Usuario(t.getUsuarioPapel().getUsuarioPapelId().getUsuarioId()));
 			t.setAtivo(true);
 			repository.save(t);
 		} else if (!tradutor.isAtivo()){

@@ -10,7 +10,7 @@ public interface CrudService<T,V>{
 	
 	void add(T t) throws ValidacaoNegocioException;
 	
-	void update(V v,T t) throws ValidacaoNegocioException;
+	void update(T t) throws ValidacaoNegocioException;
 	
 	void delete(V t) throws ValidacaoNegocioException;
 }

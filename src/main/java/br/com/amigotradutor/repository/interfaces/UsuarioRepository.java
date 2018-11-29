@@ -8,4 +8,5 @@ public interface UsuarioRepository extends PessoaBaseRepository<Usuario> {
 	
 	List<Usuario> findByPapeisId(long papelId);
 	
+	List<Usuario> findByEmailOrApelido(String email,String apelido);
 }

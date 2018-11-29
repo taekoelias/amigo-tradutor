@@ -37,5 +37,4 @@ public class UsuarioPapel{
 		this.usuarioPapelId = usuarioPapelId;
 	}
 	
-	
 }

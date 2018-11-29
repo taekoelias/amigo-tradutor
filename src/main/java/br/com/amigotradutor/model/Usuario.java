@@ -27,7 +27,6 @@ public class Usuario extends Pessoa {
 	@JoinTable(name="UsuarioPapel",
 		joinColumns=@JoinColumn(name="usuarioId", referencedColumnName="id"),
 		inverseJoinColumns=@JoinColumn(name="papelId", referencedColumnName="id"))
-	@JsonIgnoreProperties("usuarios")
 	private List<Papel> papeis;
 	
 	public Usuario() {

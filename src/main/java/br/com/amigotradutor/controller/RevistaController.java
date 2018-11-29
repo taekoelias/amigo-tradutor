@@ -30,7 +30,8 @@ public class RevistaController {
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/revistas/{id}")
 	public void updateRevista(@PathVariable long id, @RequestBody Revista revista){
-		service.update(id,revista);
+		revista.setId(id);
+		service.update(revista);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/revistas/{id}")

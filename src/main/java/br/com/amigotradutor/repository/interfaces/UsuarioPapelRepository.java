@@ -7,4 +7,6 @@ import br.com.amigotradutor.model.UsuarioPapelId;
 
 public interface UsuarioPapelRepository extends CrudRepository<UsuarioPapel,UsuarioPapelId> {
 	
+	Iterable<UsuarioPapel> findByUsuarioPapelIdUsuarioId(long usuarioId);
+	
 }

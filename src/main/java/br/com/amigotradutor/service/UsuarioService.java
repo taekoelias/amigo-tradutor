@@ -6,28 +6,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Papel;
 import br.com.amigotradutor.model.Usuario;
 import br.com.amigotradutor.model.UsuarioPapel;
 import br.com.amigotradutor.model.UsuarioPapelId;
 import br.com.amigotradutor.repository.interfaces.UsuarioPapelRepository;
 import br.com.amigotradutor.repository.interfaces.UsuarioRepository;
+import br.com.amigotradutor.validator.UsuarioValidator;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements CrudService<Usuario,Long>{
 
 	@Autowired
 	private UsuarioRepository dao;
-	
-	@Autowired
-	private UsuarioPapelRepository usuarioPapelDao;
-	
-	public void addUsuario(Usuario u) {
-		
-		u.setPapeis(new ArrayList<Papel>());
-		u.getPapeis().add(Papel.getPapelUsuario());
-		dao.save(u);
-	}
 	
 	public List<Usuario> getAll(){
 		List<Usuario> usuarios = new ArrayList<>();
@@ -36,32 +28,46 @@ public class UsuarioService {
 		return usuarios;
 	}
 	
-	public Usuario getUsuario(long usuarioId){
+	public Usuario getUsuario(long usuarioId) throws ValidacaoNegocioException{
+		UsuarioValidator validator = new UsuarioValidator(dao);
+		validator.notExists(usuarioId);
+		
 		return dao.findOne(usuarioId);
 	}
 	
-	public List<Usuario> getAllAdmin(){
-		return dao.findByPapeisId(Papel.PAPEL_ADMIN);
-	}
-	
-	public void addAdmin(Usuario u){
+	public void add(Usuario u) throws ValidacaoNegocioException {
+		
+		UsuarioValidator validator = new UsuarioValidator(dao);
+		
+		validator.requiredField(u);
+		validator.duplicated(u);
+		
+		u.setEmail(u.getEmail().trim().toLowerCase());
 		u.setPapeis(new ArrayList<Papel>());
 		u.getPapeis().add(Papel.getPapelUsuario());
-		u.getPapeis().add(Papel.getPapelAdmin());
-		u.setAdmin(true);
-		dao.save(u);
+		u = dao.save(u);
 	}
 	
-	public void addPapelTradutor(Usuario u){
-		addPapelUsuario(u, Papel.getPapelTradutor());		
+	@Override
+	public void update(Usuario u) throws ValidacaoNegocioException {
+		UsuarioValidator validator = new UsuarioValidator(dao);
+		
+		validator.notExists(u.getId());
+		validator.requiredField(u);
+		validator.duplicated(u);
+		
+		u.setEmail(u.getEmail().trim().toLowerCase());
+		
+		u = dao.save(u);
 	}
-	
-	public void addPapelUsuario(Usuario u, Papel p){
-		UsuarioPapel up = usuarioPapelDao.findOne(new UsuarioPapelId(u.getId(), p.getId()));
-		if (up == null){
-			up = new UsuarioPapel(u.getId(),p.getId());
-		} 
-		up.setAtivo(true);
-		usuarioPapelDao.save(up);
+
+	@Override
+	public void delete(Long u) throws ValidacaoNegocioException {
+		UsuarioValidator validator = new UsuarioValidator(dao);
+		
+		validator.notExists(u);
+		
+		dao.delete(u);
 	}
+
 }

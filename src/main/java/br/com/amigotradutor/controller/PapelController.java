@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,12 +22,12 @@ public class PapelController {
 	@Autowired
 	private PapelService service;
 	
-	@RequestMapping("/papeis")
+	@GetMapping("/papeis")
 	public List<Papel> getAllPapel(){
 		return service.getAll();
 	}
 	
-	@RequestMapping("/papeis/{id}")
+	@GetMapping("/papeis/{id}")
 	public Papel getAllPapel(@PathVariable long id){
 		return service.get(id);
 	}
@@ -39,11 +40,13 @@ public class PapelController {
 	
 	@PutMapping("/papeis/{id}")
 	public Papel updatePapel(@PathVariable long id, @RequestBody Papel papel) throws ValidacaoNegocioException{
-		service.update(id,papel);
+		papel.setId(id);
+		
+		service.update(papel);
 		return papel;
 	}
 	
-	@DeleteMapping(value="/papeis/{id}")
+	@DeleteMapping("/papeis/{id}")
 	public void deletePapel(@PathVariable long id) throws ValidacaoNegocioException{
 		service.delete(id);
 	}
