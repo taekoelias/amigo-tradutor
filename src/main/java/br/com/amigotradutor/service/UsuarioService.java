@@ -49,13 +49,14 @@ public class UsuarioService implements CrudService<Usuario,Long>{
 	}
 	
 	@Override
-	public void update(Usuario u) throws ValidacaoNegocioException {
+	public void update(Long id,Usuario u) throws ValidacaoNegocioException {
 		UsuarioValidator validator = new UsuarioValidator(dao);
 		
-		validator.notExists(u.getId());
+		validator.notExists(id);
 		validator.requiredField(u);
 		validator.duplicated(u);
 		
+		u.setId(id);
 		u.setEmail(u.getEmail().trim().toLowerCase());
 		
 		u = dao.save(u);

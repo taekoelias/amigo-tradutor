@@ -40,9 +40,8 @@ public class PapelController {
 	
 	@PutMapping("/papeis/{id}")
 	public Papel updatePapel(@PathVariable long id, @RequestBody Papel papel) throws ValidacaoNegocioException{
-		papel.setId(id);
 		
-		service.update(papel);
+		service.update(id,papel);
 		return papel;
 	}
 	

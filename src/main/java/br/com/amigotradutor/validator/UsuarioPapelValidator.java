@@ -7,7 +7,7 @@ import br.com.amigotradutor.model.UsuarioPapel;
 import br.com.amigotradutor.model.UsuarioPapelId;
 import br.com.amigotradutor.repository.interfaces.UsuarioPapelRepository;
 
-public class UsuarioPapelValidator implements BaseValidator<UsuarioPapel>{
+public class UsuarioPapelValidator implements BaseValidator<UsuarioPapel,UsuarioPapelId>{
 
 	UsuarioPapelRepository repository;
 	
@@ -31,5 +31,10 @@ public class UsuarioPapelValidator implements BaseValidator<UsuarioPapel>{
 		if (repository.findOne(id) == null)
 			throw new EntidadeNaoExistenteException("O vinculação do usuário com o papel informado não foi encontrado na base de dados.");
 			
+	}
+
+	@Override
+	public void duplicated(UsuarioPapel obj) throws ValidacaoNegocioException {
+		
 	}
 }

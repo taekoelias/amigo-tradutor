@@ -26,7 +26,8 @@ public class AutorService implements CrudService<Autor,Long>{
 		dao.save(a);
 	}
 	
-	public void update(Autor a){
+	public void update(Long id,Autor a){
+		a.setId(id);
 		dao.save(a);
 	}
 	

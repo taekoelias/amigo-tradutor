@@ -41,12 +41,14 @@ public class PapelService implements CrudService<Papel, Long> {
 		
 	}
 
-	public void update(Papel p) throws ValidacaoNegocioException {
+	public void update(Long id, Papel p) throws ValidacaoNegocioException {
 		
 		PapelValidator validator = new PapelValidator(repositorio);
 
-		validator.notExists(p.getId());
+		validator.notExists(id);
 		validator.duplicated(p);
+		
+		p.setId(id);
 		
 		repositorio.save(p);
 	}

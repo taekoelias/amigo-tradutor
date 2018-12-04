@@ -8,7 +8,7 @@ import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Usuario;
 import br.com.amigotradutor.repository.interfaces.UsuarioRepository;
 
-public class UsuarioValidator implements BaseValidator<Usuario>{
+public class UsuarioValidator implements BaseValidator<Usuario, Long>{
 
 	UsuarioRepository repository;
 	
@@ -43,7 +43,7 @@ public class UsuarioValidator implements BaseValidator<Usuario>{
 		}
 	}
 	
-	public void notExists(long id) throws ValidacaoNegocioException {
+	public void notExists(Long id) throws ValidacaoNegocioException {
 		
 		Usuario usuarioBD = repository.findOne(id);
 		

@@ -6,7 +6,7 @@ import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Papel;
 import br.com.amigotradutor.repository.interfaces.PapelRepository;
 
-public class PapelValidator implements BaseValidator<Papel>{
+public class PapelValidator implements BaseValidator<Papel,Long>{
 
 	PapelRepository repository;
 	
@@ -33,7 +33,7 @@ public class PapelValidator implements BaseValidator<Papel>{
 		}
 	}
 	
-	public void notExists(long id) throws ValidacaoNegocioException {
+	public void notExists(Long id) throws ValidacaoNegocioException {
 		
 		Papel papelBD = repository.findOne(id);
 		

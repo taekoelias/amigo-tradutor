@@ -60,10 +60,12 @@ public class UsuarioPapelService implements CrudService<UsuarioPapel, UsuarioPap
 	}
 
 	@Override
-	public void update(UsuarioPapel t) throws ValidacaoNegocioException {
+	public void update(UsuarioPapelId id, UsuarioPapel t) throws ValidacaoNegocioException {
 		UsuarioPapelValidator validador = new UsuarioPapelValidator(repository);
+		validador.notExists(id);
 		validador.requiredField(t);
-		validador.notExists(t.getUsuarioPapelId());
+		
+		t.setUsuarioPapelId(id);
 		
 		t = repository.save(t);
 

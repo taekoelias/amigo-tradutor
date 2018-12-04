@@ -25,9 +25,6 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 	
-	@Autowired
-	private UsuarioPapelService usuarioPapelService;
-	
 	@GetMapping("/usuarios")
 	public List<Usuario> getUsuarios(){
 		return service.getAll();
@@ -46,8 +43,7 @@ public class UsuarioController {
 	
 	@PutMapping("/usuarios/{id}")
 	public Usuario updateUsuario(@PathVariable long id, @RequestBody Usuario u) throws ValidacaoNegocioException {
-		u.setId(id);
-		service.update(u);
+		service.update(id, u);
 		return u;
 	}
 	
@@ -56,44 +52,4 @@ public class UsuarioController {
 		service.delete(id);
 	}
 	
-	@GetMapping("/usuarios/{id}/papeis")
-	public List<UsuarioPapel> getPapeisUsuario(@PathVariable long id) throws ValidacaoNegocioException{
-		return usuarioPapelService.getAllPapelByUsuario(id);
-	}
-	
-	@PostMapping("/usuarios/{id}/papeis")
-	public UsuarioPapel addUsuarioPapel(@PathVariable long id, @RequestBody Papel p) throws ValidacaoNegocioException{
-		
-		UsuarioPapel up = new UsuarioPapel(id, p.getId());
-		usuarioPapelService.add(up);
-		
-		return up;
-	}
-	
-	@PutMapping("/usuarios/{id}/papeis/{idPapel}/ativa")
-	public UsuarioPapel ativaPapeisUsuario(@PathVariable long id, @PathVariable long idPapel) throws ValidacaoNegocioException{
-		
-		UsuarioPapel up = new UsuarioPapel(id, idPapel);
-		up.setAtivo(true);
-		
-		usuarioPapelService.update(up);
-		
-		return up;
-	}
-	
-	@PutMapping("/usuarios/{id}/papeis/{idPapel}/desativa")
-	public UsuarioPapel desativaPapeisUsuario(@PathVariable long id, @PathVariable long idPapel) throws ValidacaoNegocioException{
-		
-		UsuarioPapel up = new UsuarioPapel(id, idPapel);
-		up.setAtivo(false);
-		
-		usuarioPapelService.update(up);
-		
-		return up;
-	}
-	
-	@DeleteMapping("/usuarios/{id}/papeis/{idPapel}")
-	public void deleteUsuarioPapel(@PathVariable long id, @PathVariable long idPapel) throws ValidacaoNegocioException{
-		usuarioPapelService.delete(new UsuarioPapelId(id, idPapel));
-	}
 }
