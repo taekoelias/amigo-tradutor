@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.amigotradutor.model.Idioma;
 import br.com.amigotradutor.service.ListagensService;
-import br.com.amigotradutor.types.EGeneroManga;
-import br.com.amigotradutor.types.EPeriodicidade;
 
 @RestController
 public class ListagensController {
@@ -20,15 +18,5 @@ public class ListagensController {
 	@RequestMapping("/listagens/idiomas")
 	public List<Idioma> getAllIdiomas(){
 		return service.getAllIdiomas();
-	}
-	
-	@RequestMapping("/listagens/generosManga")
-	public List<EGeneroManga> getAllGenerosManga(){
-		return service.getAllGenerosManga();
-	}
-	
-	@RequestMapping("/listagens/periodicidades")
-	public List<EPeriodicidade> getAllPeriodicidades(){
-		return service.getAllPeriodicidades();
 	}
 }

@@ -17,26 +17,25 @@ public class Capitulo {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private long numero;
-	
-	private String titulo;
-	
 	@ManyToOne
-	private Manga manga;
+    private Volume volume;
+ 
+    private long numero;
 	
-	@ManyToOne
-	private Volume volume;
+	private String tituloTraduzido;
+	
+	private String tituloOriginal;
 	
 	@Temporal(TemporalType.DATE)
 	private Date publicacao;
 
-	public Capitulo(long id, long numero, String titulo, long volume, long manga, Date publicacao) {
+	public Capitulo(long id, long numero, String tituloTraduzido, String tituloOriginal, long volume, Date publicacao) {
 		super();
 		this.id = id;
 		this.numero = numero;
-		this.titulo = titulo;
-		this.volume = new Volume(volume,0,null,0, manga);
-		this.manga = new Manga(manga,null,0,0,null,null);
+		this.volume = new Volume(volume);
+		this.tituloTraduzido = tituloTraduzido;
+		this.tituloOriginal = tituloOriginal;
 		this.publicacao = publicacao;
 	}
 	
@@ -51,22 +50,6 @@ public class Capitulo {
 		this.id = id;
 	}
 
-	public long getNumero() {
-		return numero;
-	}
-
-	public void setNumero(long numero) {
-		this.numero = numero;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
 	public Volume getVolume() {
 		return volume;
 	}
@@ -75,20 +58,36 @@ public class Capitulo {
 		this.volume = volume;
 	}
 
+	public long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(long numero) {
+		this.numero = numero;
+	}
+
+	public String getTituloTraduzido() {
+		return tituloTraduzido;
+	}
+
+	public void setTituloTraduzido(String tituloTraduzido) {
+		this.tituloTraduzido = tituloTraduzido;
+	}
+
+	public String getTituloOriginal() {
+		return tituloOriginal;
+	}
+
+	public void setTituloOriginal(String tituloOriginal) {
+		this.tituloOriginal = tituloOriginal;
+	}
+
 	public Date getPublicacao() {
 		return publicacao;
 	}
 
 	public void setPublicacao(Date publicacao) {
 		this.publicacao = publicacao;
-	}
-
-	public Manga getManga() {
-		return manga;
-	}
-
-	public void setManga(Manga manga) {
-		this.manga = manga;
 	}
 	
 }

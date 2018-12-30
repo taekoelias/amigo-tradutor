@@ -37,7 +37,7 @@ public class IdiomaValidator implements BaseValidator<Idioma, Long> {
 	@Override
 	public void notExists(Long id) throws ValidacaoNegocioException {
 		
-		if (repository.findOne(id) == null)
+		if (!repository.existsById(id))
 			throw new EntidadeNaoExistenteException("O idioma informado não foi encontrado na base de dados.");
 	}
 	

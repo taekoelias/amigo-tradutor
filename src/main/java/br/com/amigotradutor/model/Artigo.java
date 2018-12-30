@@ -2,20 +2,20 @@ package br.com.amigotradutor.model;
 
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-
-import br.com.amigotradutor.types.EGeneroManga;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-public class Manga {
+@Table(uniqueConstraints=@UniqueConstraint(columnNames = { "titulo","autor_id","revista_id" }))
+public class Artigo {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -29,16 +29,23 @@ public class Manga {
 	@OneToOne
 	private Revista revista;
 	
-	@ElementCollection(targetClass=EGeneroManga.class)
-	@CollectionTable(name="MANGA_GENERO", joinColumns = @JoinColumn(name="mangaId"))
-	private List<EGeneroManga> generos;
+	@ManyToMany
+    @JoinTable(name="artigo_genero_artigo", joinColumns=
+    {@JoinColumn(name="artigo_id")}, inverseJoinColumns=
+      {@JoinColumn(name="genero_artigo_id")})
+	private List<GeneroArtigo> generos;
 	
 	private String enredo;
 	
-	public Manga() {
+	public Artigo() {
 	}
 
-	public Manga(long id, String titulo, long autor, long revista, List<EGeneroManga> generos, String enredo) {
+	public Artigo(long id) {
+		super();
+		this.id = id;
+	}
+	
+	public Artigo(long id, String titulo, long autor, long revista, List<GeneroArtigo> generos, String enredo) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -80,11 +87,11 @@ public class Manga {
 		this.revista = revista;
 	}
 
-	public List<EGeneroManga> getGeneros() {
+	public List<GeneroArtigo> getGeneros() {
 		return generos;
 	}
 
-	public void setGeneros(List<EGeneroManga> generos) {
+	public void setGeneros(List<GeneroArtigo> generos) {
 		this.generos = generos;
 	}
 

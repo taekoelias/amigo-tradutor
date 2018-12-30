@@ -45,9 +45,7 @@ public class UsuarioValidator implements BaseValidator<Usuario, Long>{
 	
 	public void notExists(Long id) throws ValidacaoNegocioException {
 		
-		Usuario usuarioBD = repository.findOne(id);
-		
-		if (usuarioBD == null)
+		if (!repository.existsById(id))
 			throw new EntidadeNaoExistenteException("O usuário informado não foi encontrado na base de dados.");
 		
 	}

@@ -1,35 +1,29 @@
 package br.com.amigotradutor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import br.com.amigotradutor.model.Idioma;
-import br.com.amigotradutor.model.Papel;
-import br.com.amigotradutor.repository.interfaces.IdiomaRepository;
-import br.com.amigotradutor.repository.interfaces.PapelRepository;
-
 @SpringBootApplication
 public class AmigoTradutorApplication {
-
+/*
 	@Autowired
 	private PapelRepository papelDao;
 	
 	@Autowired
 	private IdiomaRepository idiomaDao;
-	
+*/	
 	public static void main(String[] args) {
 		SpringApplication.run(AmigoTradutorApplication.class, args);
 
 	}
-
+	
 	@Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
-
+/*
         	Papel papelUsuario = new Papel();
     		papelUsuario.setId(Papel.PAPEL_USUARIO);
     		papelUsuario.setNome("Usuário");
@@ -78,7 +72,7 @@ public class AmigoTradutorApplication {
     		idiomaDao.save(us);
     		Idioma jp = new Idioma(Idioma.JP, "Japonês", "JP");
     		idiomaDao.save(jp);
-
+*/
         };
     }
 

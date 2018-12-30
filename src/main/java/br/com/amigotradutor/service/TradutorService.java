@@ -68,6 +68,6 @@ public class TradutorService {
 	}
 	
 	public void delete(long tradutorId){
-		repository.delete(tradutorId);
+		repository.deleteById(tradutorId);
 	}
 }

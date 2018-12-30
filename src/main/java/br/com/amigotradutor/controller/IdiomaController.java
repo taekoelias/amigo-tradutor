@@ -28,7 +28,7 @@ public class IdiomaController {
 
 	@GetMapping("/idiomas/{id}")
 	public Idioma getIdioma(@PathVariable long id) {
-		return service.getIdioma(id);
+		return service.getOne(id);
 	}
 	
 	@PostMapping("/idiomas")

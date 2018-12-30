@@ -32,7 +32,7 @@ public class UsuarioController {
 	
 	@GetMapping("/usuarios/{id}")
 	public Usuario getUsuario(@PathVariable long id) throws ValidacaoNegocioException{
-		return service.getUsuario(id);
+		return service.getOne(id);
 	}
 	
 	@PostMapping("/usuarios")

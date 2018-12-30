@@ -2,11 +2,11 @@ package br.com.amigotradutor.validator;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 
-public interface BaseValidator<T,V> {
+public interface BaseValidator<TYPE,ID> {
 
-	void requiredField(T obj) throws ValidacaoNegocioException;
+	void requiredField(TYPE obj) throws ValidacaoNegocioException;
 	
-	void duplicated(T obj) throws ValidacaoNegocioException;
+	void duplicated(TYPE obj) throws ValidacaoNegocioException;
 	
-	void notExists(V id) throws ValidacaoNegocioException;
+	void notExists(ID id) throws ValidacaoNegocioException;
 }

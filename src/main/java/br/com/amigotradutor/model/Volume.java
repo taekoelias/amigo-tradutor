@@ -4,35 +4,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames = { "numero","artigo_id" }))
 public class Volume {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private long numero;
+	@ManyToOne
+    @JoinColumn(name = "artigo_id")
+    private Artigo artigo;
+ 
+    private long numero;
 	
 	private String titulo;
-	
-	@ManyToOne
-	private Manga manga;
-	
-	@ManyToOne
-	private Colecao colecao;
 	
 	public Volume() {
 	}
 
-	public Volume(long id, long numero, String titulo, long colecao, long manga) {
+	public Volume(long id) {
+		super();
+		this.id = id;
+	}
+
+	public Volume(long id, long numero, String titulo, long artigo) {
 		super();
 		this.id = id;
 		this.numero = numero;
+		this.artigo = new Artigo(artigo);
 		this.titulo = titulo;
-		this.colecao = new Colecao(colecao,null,manga);
-		this.manga = new Manga(manga,null,0,0,null,null);
 	}
 
 	public long getId() {
@@ -43,14 +49,6 @@ public class Volume {
 		this.id = id;
 	}
 
-	public long getNumero() {
-		return numero;
-	}
-
-	public void setNumero(long numero) {
-		this.numero = numero;
-	}
-
 	public String getTitulo() {
 		return titulo;
 	}
@@ -59,12 +57,20 @@ public class Volume {
 		this.titulo = titulo;
 	}
 
-	public Colecao getColecao() {
-		return colecao;
+	public Artigo getArtigo() {
+		return artigo;
 	}
 
-	public void setColecao(Colecao colecao) {
-		this.colecao = colecao;
+	public void setArtigo(Artigo artigo) {
+		this.artigo = artigo;
+	}
+
+	public long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(long numero) {
+		this.numero = numero;
 	}
 	
 }

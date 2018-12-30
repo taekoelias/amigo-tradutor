@@ -28,11 +28,11 @@ public class UsuarioService implements CrudService<Usuario,Long>{
 		return usuarios;
 	}
 	
-	public Usuario getUsuario(long usuarioId) throws ValidacaoNegocioException{
+	public Usuario getOne(Long usuarioId) throws ValidacaoNegocioException{
 		UsuarioValidator validator = new UsuarioValidator(dao);
 		validator.notExists(usuarioId);
 		
-		return dao.findOne(usuarioId);
+		return dao.findById(usuarioId).get();
 	}
 	
 	public void add(Usuario u) throws ValidacaoNegocioException {
@@ -68,7 +68,7 @@ public class UsuarioService implements CrudService<Usuario,Long>{
 		
 		validator.notExists(u);
 		
-		dao.delete(u);
+		dao.deleteById(u);
 	}
 
 }

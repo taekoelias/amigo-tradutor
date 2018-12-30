@@ -24,8 +24,8 @@ public class PapelService implements CrudService<Papel, Long> {
 		return papeis;
 	}
 	
-	public Papel get(long id) {
-		return repositorio.findOne(id);
+	public Papel getOne(Long id) {
+		return repositorio.findById(id).get();
 	}
 
 	public void add(Papel p) throws ValidacaoNegocioException {
@@ -59,7 +59,7 @@ public class PapelService implements CrudService<Papel, Long> {
 		
 		validator.notExists(p);
 		
-		repositorio.delete(p);
+		repositorio.deleteById(p);
 	}
 
 }

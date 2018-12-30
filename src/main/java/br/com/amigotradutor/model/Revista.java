@@ -3,8 +3,6 @@ package br.com.amigotradutor.model;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-
-import br.com.amigotradutor.types.EPeriodicidade;
 
 @Entity
 public class Revista {
@@ -28,23 +24,23 @@ public class Revista {
 	private Editora editora;
 	
 	@ManyToMany
-    @JoinTable(name="revista_tipo_manga", joinColumns=
+    @JoinTable(name="revista_publico_alvo", joinColumns=
     {@JoinColumn(name="revista_id")}, inverseJoinColumns=
-      {@JoinColumn(name="tipo_manga_id")})
-	private List<TipoManga> tipos;
+      {@JoinColumn(name="publico_alvo_id")})
+	private List<PublicoAlvo> publicos;
 	
-	@Enumerated(EnumType.STRING)
-	private EPeriodicidade periodicidade;
+	@OneToOne
+	private PeriodicidadePublicacao periodicidade;
 	
 	public Revista() {
 	}
 
-	public Revista(long id, String nome, Editora editora, List<TipoManga> tipos, EPeriodicidade periodicidade) {
+	public Revista(long id, String nome, Editora editora, List<PublicoAlvo> publicos, PeriodicidadePublicacao periodicidade) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.editora = editora;
-		this.tipos = tipos;
+		this.publicos = publicos;
 		this.periodicidade = periodicidade;
 	}
 
@@ -72,19 +68,19 @@ public class Revista {
 		this.editora = editora;
 	}
 
-	public List<TipoManga> getTipo() {
-		return tipos;
+	public List<PublicoAlvo> getPublicos() {
+		return publicos;
 	}
 
-	public void setTipo(List<TipoManga> tipos) {
-		this.tipos = tipos;
+	public void setPublicos(List<PublicoAlvo> tipos) {
+		this.publicos = tipos;
 	}
 
-	public EPeriodicidade getPeriodicidade() {
+	public PeriodicidadePublicacao getPeriodicidade() {
 		return periodicidade;
 	}
 
-	public void setPeriodicidade(EPeriodicidade periodicidade) {
+	public void setPeriodicidade(PeriodicidadePublicacao periodicidade) {
 		this.periodicidade = periodicidade;
 	}
 	

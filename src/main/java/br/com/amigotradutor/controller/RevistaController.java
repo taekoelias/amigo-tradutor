@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Revista;
 import br.com.amigotradutor.service.RevistaService;
 
@@ -23,18 +24,23 @@ public class RevistaController {
 		return service.getAll();
 	}
 	
+	@RequestMapping("/revistas/{id}")
+	public Revista getRevista(@PathVariable long id) throws ValidacaoNegocioException{
+		return service.getOne(id);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, value="/revistas")
-	public void addRevista(@RequestBody Revista revista){
+	public void addRevista(@RequestBody Revista revista) throws ValidacaoNegocioException{
 		service.add(revista);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/revistas/{id}")
-	public void updateRevista(@PathVariable long id, @RequestBody Revista revista){
+	public void updateRevista(@PathVariable long id, @RequestBody Revista revista) throws ValidacaoNegocioException{
 		service.update(id, revista);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/revistas/{id}")
-	public void removeRevista(@PathVariable long id){
+	public void removeRevista(@PathVariable long id) throws ValidacaoNegocioException{
 		service.delete(id);
 	}
 }

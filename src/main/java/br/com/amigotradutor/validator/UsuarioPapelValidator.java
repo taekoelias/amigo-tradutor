@@ -28,7 +28,7 @@ public class UsuarioPapelValidator implements BaseValidator<UsuarioPapel,Usuario
 		if (id == null)
 			throw new ValidacaoNegocioException("Os dados da vinculação do usuário com o papel não foram preenchidos.");
 		
-		if (repository.findOne(id) == null)
+		if (!repository.existsById(id))
 			throw new EntidadeNaoExistenteException("O vinculação do usuário com o papel informado não foi encontrado na base de dados.");
 			
 	}

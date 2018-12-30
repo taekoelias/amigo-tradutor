@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Autor;
 import br.com.amigotradutor.service.AutorService;
 
@@ -23,18 +24,23 @@ public class AutorController {
 		return service.getAll();
 	}
 	
+	@RequestMapping("/autores/{id}")
+	public Autor getAutor(@PathVariable long id) throws ValidacaoNegocioException{
+		return service.getOne(id);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, value="/autores")
-	public void addAutor(@RequestBody Autor autor){
+	public void addAutor(@RequestBody Autor autor) throws ValidacaoNegocioException{
 		service.add(autor);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/autores/{id}")
-	public void updateAutor(@PathVariable long id, @RequestBody Autor autor){
+	public void updateAutor(@PathVariable long id, @RequestBody Autor autor) throws ValidacaoNegocioException{
 		service.update(id, autor);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value="/autores/{id}")
-	public void removeAutor(@PathVariable long id){
+	public void removeAutor(@PathVariable long id) throws ValidacaoNegocioException{
 		service.delete(id);
 	}
 }

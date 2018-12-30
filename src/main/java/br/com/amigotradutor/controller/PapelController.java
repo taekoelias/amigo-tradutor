@@ -29,7 +29,7 @@ public class PapelController {
 	
 	@GetMapping("/papeis/{id}")
 	public Papel getAllPapel(@PathVariable long id){
-		return service.get(id);
+		return service.getOne(id);
 	}
 	
 	@PostMapping("/papeis")

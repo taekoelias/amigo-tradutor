@@ -26,8 +26,8 @@ public class IdiomaService implements CrudService<Idioma, Long>{
 		return idiomas;
 	}
 	
-	public Idioma getIdioma(long id) {
-		return repository.findOne(id);
+	public Idioma getOne(Long id) {
+		return repository.findById(id).get();
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class IdiomaService implements CrudService<Idioma, Long>{
 		
 		validator.notExists(id);
 		
-		repository.delete(id);
+		repository.deleteById(id);
 	}
 
 }

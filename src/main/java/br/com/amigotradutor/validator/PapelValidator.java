@@ -35,9 +35,7 @@ public class PapelValidator implements BaseValidator<Papel,Long>{
 	
 	public void notExists(Long id) throws ValidacaoNegocioException {
 		
-		Papel papelBD = repository.findOne(id);
-		
-		if (papelBD == null)
+		if (!repository.existsById(id))
 			throw new EntidadeNaoExistenteException("O papel informado não foi encontrado na base de dados.");
 		
 	}

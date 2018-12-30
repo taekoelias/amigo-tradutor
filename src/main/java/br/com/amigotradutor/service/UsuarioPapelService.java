@@ -40,6 +40,11 @@ public class UsuarioPapelService implements CrudService<UsuarioPapel, UsuarioPap
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public UsuarioPapel getOne(UsuarioPapelId v) {
+		return repository.findById(v).get();
+	}
 
 	@Override
 	public void add(UsuarioPapel t) throws ValidacaoNegocioException {
@@ -52,7 +57,7 @@ public class UsuarioPapelService implements CrudService<UsuarioPapel, UsuarioPap
 		PapelValidator papelValidator = new PapelValidator(papelRepository);
 		papelValidator.notExists(t.getUsuarioPapelId().getPapelId());
 		
-		UsuarioPapel up = repository.findOne(t.getUsuarioPapelId());
+		UsuarioPapel up = repository.findById(t.getUsuarioPapelId()).get();
 		if (up == null || !up.isAtivo()) {
 			t.setAtivo(true);
 			t = repository.save(t);
@@ -76,7 +81,7 @@ public class UsuarioPapelService implements CrudService<UsuarioPapel, UsuarioPap
 		UsuarioPapelValidator validador = new UsuarioPapelValidator(repository);
 		validador.notExists(t);
 		
-		repository.delete(t);
+		repository.deleteById(t);
 	}
 
 }

@@ -4,13 +4,15 @@ import java.util.List;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 
-public interface CrudService<T,V>{
+public interface CrudService<TYPE,ID>{
 
-	List<T> getAll();
+	List<TYPE> getAll();
 	
-	void add(T t) throws ValidacaoNegocioException;
+	TYPE getOne(ID v) throws ValidacaoNegocioException;
 	
-	void update(V v, T t) throws ValidacaoNegocioException;
+	void add(TYPE t) throws ValidacaoNegocioException;
 	
-	void delete(V t) throws ValidacaoNegocioException;
+	void update(ID v, TYPE t) throws ValidacaoNegocioException;
+	
+	void delete(ID t) throws ValidacaoNegocioException;
 }
