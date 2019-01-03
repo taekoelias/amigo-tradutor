@@ -37,7 +37,9 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        echo 'TODO: adicionar passo de deploy'
+        sh '''make build-docker-prod-image
+make deploy-production-ssh
+'''
       }
     }
   }
