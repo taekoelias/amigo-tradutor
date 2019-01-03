@@ -18,7 +18,7 @@ test:
     - ./:/app
     - ~/.m2:/root/.m2
   working_dir: /app
-  command: "mvn cobertura:cobertura test"
+  command: "mvn test"
 
 server:
   image: localhost:5000/maven
