@@ -31,16 +31,4 @@ public class PapelControllerTest {
                 .andExpect(status().isOk());
     }
 	
-    @Test
-    public void getPapelAdministrador() throws Exception {
-    	
-    	Papel papelAdministrador = new Papel();
-		papelAdministrador.setId(Papel.PAPEL_ADMIN);
-		papelAdministrador.setNome("Administrador");
-		papelAdministrador.setDescricao("Usuário administrador do sistema.");
-    	
-        mvc.perform(MockMvcRequestBuilders.get("/papeis/"+Papel.PAPEL_ADMIN).accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn().equals(papelAdministrador);
-    }
 }
