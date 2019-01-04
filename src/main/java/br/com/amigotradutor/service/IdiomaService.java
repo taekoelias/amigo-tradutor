@@ -36,6 +36,8 @@ public class IdiomaService implements CrudService<Idioma, Long>{
 		IdiomaValidator validator = new IdiomaValidator(repository);
 		
 		validator.requiredField(t);
+		validator.duplicated(t);
+		
 		t.setId(repository.nextId()+1);
 		t.setNome(t.getNome().toUpperCase());
 		t.setSigla(t.getSigla().toUpperCase());

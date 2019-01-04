@@ -11,7 +11,7 @@ public interface IdiomaRepository extends CrudRepository<Idioma, Long> {
 
 	List<Idioma> findByNomeOrSigla(String nome, String sigla);
 	
-	@Query("SELECT MAX(i.id) FROM Idioma i")
+	@Query("SELECT COALESCE(MAX(i.id),0) FROM Idioma i")
 	Long nextId();
 	
 }
