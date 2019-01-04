@@ -37,9 +37,9 @@ public class PeriodicidadeService implements CrudService<PeriodicidadePublicacao
 
 	public void update(Long v, PeriodicidadePublicacao t) throws ValidacaoNegocioException {
 		PeriodicidadeValidator validator = new PeriodicidadeValidator(repository);
+		validator.notExists(v);
 		validator.requiredField(t);
 		validator.duplicated(t);
-		validator.notExists(v);
 		
 		t.setId(v);
 		repository.save(t);

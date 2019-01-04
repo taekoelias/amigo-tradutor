@@ -1,6 +1,5 @@
 package br.com.amigotradutor.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,13 @@ public class RevistaService implements CrudService<Revista,Long>{
 	@Autowired
 	private RevistaRepository dao;
 
+	public List<Revista> getAll(String nome) {
+		return dao.findByNomeIgnoreCaseContaining(nome);
+	}
+	
 	@Override
 	public List<Revista> getAll() {
-		List<Revista> revistas = new ArrayList<Revista>();
-		dao.findAll().forEach(revistas::add);
-		return revistas;
+		return (List<Revista>) dao.findAll();
 	}
 	
 	@Override

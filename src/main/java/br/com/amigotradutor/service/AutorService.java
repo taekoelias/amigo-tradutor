@@ -24,6 +24,10 @@ public class AutorService implements CrudService<Autor,Long>{
 		return autores;
 	}
 	
+	public List<Autor> getAll(String nome) {
+		return dao.findByNomeIgnoreCaseContaining(nome);
+	}
+	
 	@Override
 	public Autor getOne(Long v) throws ValidacaoNegocioException {
 		AutorValidator validador = new AutorValidator(dao);

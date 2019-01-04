@@ -10,4 +10,6 @@ public interface RevistaRepository extends CrudRepository<Revista, Long> {
 
 	List<Revista> findByNomeAndEditoraId(String nome, long id);
 
+	List<Revista> findByNomeIgnoreCaseContaining(String nome);
+	
 }
