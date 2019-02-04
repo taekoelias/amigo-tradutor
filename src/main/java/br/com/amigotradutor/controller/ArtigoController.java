@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Artigo;
 import br.com.amigotradutor.service.ArtigoService;
+import br.com.amigotradutor.util.ValidatorUtil;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class ArtigoController {
@@ -22,7 +24,10 @@ public class ArtigoController {
 	private ArtigoService service;
 	
 	@GetMapping("/artigos")
-	public List<Artigo> getGenerosArtigo(){
+	public List<Artigo> getAll(@RequestParam(name="titulo",required=false) String titulo){
+		if (ValidatorUtil.isNotEmpty(titulo))
+			return service.getAll(titulo);
+		
 		return service.getAll();
 	}
 	

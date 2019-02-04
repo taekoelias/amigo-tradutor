@@ -52,4 +52,8 @@ public class ArtigoService implements CrudService<Artigo, Long> {
 		repository.deleteById(t);
 	}
 
+    public List<Artigo> getAll(String titulo) {
+        return repository.findByTituloIgnoreCaseContaining(titulo);
+    }
+
 }

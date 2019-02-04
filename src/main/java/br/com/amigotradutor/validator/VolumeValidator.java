@@ -19,7 +19,7 @@ public class VolumeValidator implements BaseValidator<Volume, Long> {
 	
 	@Override
 	public void requiredField(Volume obj) throws ValidacaoNegocioException {
-		if (ValidatorUtil.isEmpty(obj) || ValidatorUtil.isEmpty(obj.getId()) 
+		if (ValidatorUtil.isEmpty(obj) 
 				|| ValidatorUtil.isEmpty(obj.getArtigo()) 
 				|| ValidatorUtil.isEmpty(obj.getArtigo().getId()) 
 				|| ValidatorUtil.isEmpty(obj.getNumero()) 

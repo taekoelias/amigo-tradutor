@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Artigo;
 import br.com.amigotradutor.model.Volume;
-import br.com.amigotradutor.model.VolumeId;
 import br.com.amigotradutor.service.VolumeService;
 
 @RestController

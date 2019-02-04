@@ -13,64 +13,64 @@ import javax.persistence.UniqueConstraint;
 @Table(uniqueConstraints=@UniqueConstraint(columnNames = { "numero","artigo_id" }))
 public class Volume {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
-	@ManyToOne
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+
+    @ManyToOne
     @JoinColumn(name = "artigo_id")
     private Artigo artigo;
  
     private long numero;
 	
-	private String titulo;
-	
-	public Volume() {
-	}
+    private String titulo;
 
-	public Volume(long id) {
-		super();
-		this.id = id;
-	}
+    public Volume() {
+    }
 
-	public Volume(long id, long numero, String titulo, long artigo) {
-		super();
-		this.id = id;
-		this.numero = numero;
-		this.artigo = new Artigo(artigo);
-		this.titulo = titulo;
-	}
+    public Volume(long id) {
+            super();
+            this.id = id;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public Volume(long id, long numero, String titulo, long artigo) {
+            super();
+            this.id = id;
+            this.numero = numero;
+            this.artigo = new Artigo(artigo);
+            this.titulo = titulo;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+            return id;
+    }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public void setId(long id) {
+            this.id = id;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public String getTitulo() {
+            return titulo;
+    }
 
-	public Artigo getArtigo() {
-		return artigo;
-	}
+    public void setTitulo(String titulo) {
+            this.titulo = titulo;
+    }
 
-	public void setArtigo(Artigo artigo) {
-		this.artigo = artigo;
-	}
+    public Artigo getArtigo() {
+            return artigo;
+    }
 
-	public long getNumero() {
-		return numero;
-	}
+    public void setArtigo(Artigo artigo) {
+            this.artigo = artigo;
+    }
 
-	public void setNumero(long numero) {
-		this.numero = numero;
-	}
+    public long getNumero() {
+            return numero;
+    }
+
+    public void setNumero(long numero) {
+            this.numero = numero;
+    }
 	
 }
