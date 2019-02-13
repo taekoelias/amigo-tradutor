@@ -12,7 +12,5 @@ public interface VolumeRepository extends CrudRepository<Volume, Long> {
 	List<Volume> findByArtigoId(long idArtigo);
 
 	List<Volume> findByNumeroAndArtigoId(long numero, long idArtigo);
-
-        Artigo findArtigoById(long id);
         
 }

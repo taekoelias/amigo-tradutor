@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.model.Artigo;
 import br.com.amigotradutor.model.Capitulo;
+import br.com.amigotradutor.model.Volume;
 import br.com.amigotradutor.repository.interfaces.CapituloRepository;
 import br.com.amigotradutor.repository.interfaces.VolumeRepository;
+import br.com.amigotradutor.repository.specification.CapituloSpecification;
 import br.com.amigotradutor.validator.CapituloValidator;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class CapituloService {
@@ -54,5 +58,11 @@ public class CapituloService {
 		
 		repository.deleteById(t);
 	}
+
+
+
+    public List<Capitulo> getAllByArtigoVolume(long idArtigo,long idVolume) {
+        return repository.findAll(CapituloSpecification.filterByArtidoAndVolume(idArtigo, idVolume),Sort.by("numero"));
+    }
 
 }

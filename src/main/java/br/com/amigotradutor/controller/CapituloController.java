@@ -23,9 +23,14 @@ public class CapituloController {
 	@Autowired
 	private CapituloService service;
 	
+        @GetMapping("/artigos/{idArtigo}/capitulos")
+	public List<Capitulo> getCapitulosByArtigo(@PathVariable long idArtigo){
+		return service.getAllByArtigoVolume(idArtigo,0);
+	}
+        
 	@GetMapping("/artigos/{idArtigo}/volumes/{idVolume}/capitulos")
-	public List<Capitulo> getCapitulos(@PathVariable long idVolume){
-		return service.getAll(idVolume);
+	public List<Capitulo> getCapitulosByArtigoVolume(@PathVariable long idArtigo, @PathVariable long idVolume){
+		return service.getAllByArtigoVolume(idArtigo, idVolume);
 	}
 	
 	@GetMapping("/artigos/{idArtigo}/volumes/{idVolume}/capitulos/{idCapitulo}")
@@ -34,16 +39,16 @@ public class CapituloController {
 	}
 	
 	@PostMapping("/artigos/{idArtigo}/volumes/{idVolume}/capitulos")
-	public Capitulo addCapitulo(@PathVariable long idVolume, @RequestBody Capitulo capitulo) throws ValidacaoNegocioException{
-		
+	public Capitulo addCapitulo(@PathVariable long idArtigo, @PathVariable long idVolume, @RequestBody Capitulo capitulo) throws ValidacaoNegocioException{
+		capitulo.setArtigo(new Artigo(idArtigo));
 		capitulo.setVolume(new Volume(idVolume));
 		service.add(capitulo);
 		return capitulo;
 	}
 	
 	@PutMapping("/artigos/{idArtigo}/volumes/{idVolume}/capitulos/{idCapitulo}")
-	public Capitulo updateCapitulo(@PathVariable long idCapitulo, @PathVariable long idVolume, @RequestBody Capitulo capitulo) throws ValidacaoNegocioException{
-		
+	public Capitulo updateCapitulo(@PathVariable long idArtigo, @PathVariable long idCapitulo, @PathVariable long idVolume, @RequestBody Capitulo capitulo) throws ValidacaoNegocioException{
+		capitulo.setArtigo(new Artigo(idArtigo));
 		capitulo.setVolume(new Volume(idVolume));
 		service.update(idCapitulo, capitulo);
 		return capitulo;
