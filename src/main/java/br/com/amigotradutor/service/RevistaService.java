@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Revista;
 import br.com.amigotradutor.repository.interfaces.RevistaRepository;
+import br.com.amigotradutor.repository.specification.RevistaSpecification;
 import br.com.amigotradutor.validator.RevistaValidator;
 
 @Service
@@ -16,8 +18,9 @@ public class RevistaService implements CrudService<Revista,Long>{
 	@Autowired
 	private RevistaRepository dao;
 
-	public List<Revista> getAll(String nome) {
-		return dao.findByNomeIgnoreCaseContaining(nome);
+	public List<Revista> getByParams(String nome, Long editora, Long periodicidade,
+			List<Long> publicos) {
+		return dao.findAll(RevistaSpecification.filterByNomeEditoraPeriodicidadePublicos(nome, editora, periodicidade, publicos));
 	}
 	
 	@Override

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
@@ -22,8 +23,8 @@ public class EditoraController {
 	private EditoraService service;
 	
 	@GetMapping("/editoras")
-	public List<Editora> getEditoras(){
-		return service.getAll();
+	public List<Editora> getEditoras(@RequestParam(required=false) String nome){
+		return service.getByParams(nome);
 	}
 	
 	@GetMapping("/editoras/{id}")

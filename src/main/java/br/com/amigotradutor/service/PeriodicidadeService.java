@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.model.GeneroArtigo;
 import br.com.amigotradutor.model.PeriodicidadePublicacao;
 import br.com.amigotradutor.repository.interfaces.PeriodicidadeRepository;
+import br.com.amigotradutor.repository.specification.BaseObjetoTipoSpecification;
 import br.com.amigotradutor.validator.PeriodicidadeValidator;
 
 @Service
@@ -18,6 +20,10 @@ public class PeriodicidadeService implements CrudService<PeriodicidadePublicacao
 	
 	public List<PeriodicidadePublicacao> getAll() {
 		return (List<PeriodicidadePublicacao>) repository.findAll();
+	}
+	
+	public List<PeriodicidadePublicacao> getByParams(String nome) {
+		return repository.findAll(BaseObjetoTipoSpecification.filterByNome(PeriodicidadePublicacao.class,nome));
 	}
 	
 	public PeriodicidadePublicacao getOne(Long v) throws ValidacaoNegocioException {

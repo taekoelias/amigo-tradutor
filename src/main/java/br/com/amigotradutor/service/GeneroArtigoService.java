@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.GeneroArtigo;
 import br.com.amigotradutor.repository.interfaces.GeneroArtigoRepository;
+import br.com.amigotradutor.repository.specification.BaseObjetoTipoSpecification;
 import br.com.amigotradutor.validator.GeneroArtigoValidator;
 
 @Service
@@ -18,6 +19,10 @@ public class GeneroArtigoService implements CrudService<GeneroArtigo, Long> {
 	
 	public List<GeneroArtigo> getAll() {
 		return (List<GeneroArtigo>) repository.findAll();
+	}
+	
+	public List<GeneroArtigo> getByParams(String nome) {
+		return repository.findAll(BaseObjetoTipoSpecification.filterByNome(GeneroArtigo.class,nome));
 	}
 	
 	public GeneroArtigo getOne(Long v) throws ValidacaoNegocioException {

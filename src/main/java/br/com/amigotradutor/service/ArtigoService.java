@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Artigo;
 import br.com.amigotradutor.repository.interfaces.ArtigoRepository;
+import br.com.amigotradutor.repository.specification.ArtigoSpecification;
 import br.com.amigotradutor.validator.ArtigoValidator;
 
 @Service
@@ -15,6 +16,10 @@ public class ArtigoService implements CrudService<Artigo, Long> {
 
 	@Autowired
 	private ArtigoRepository repository;
+	
+	public List<Artigo> getByParams(String titulo, Long autor, Long revista, List<Long> generos) {
+		return (List<Artigo>) repository.findAll(ArtigoSpecification.filterByTituloAutorRevistaGeneros(titulo, autor, revista, generos));
+	}
 	
 	public List<Artigo> getAll() {
 		return (List<Artigo>) repository.findAll();

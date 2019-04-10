@@ -9,6 +9,7 @@ import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Volume;
 import br.com.amigotradutor.model.VolumeId;
 import br.com.amigotradutor.repository.interfaces.VolumeRepository;
+import br.com.amigotradutor.repository.specification.VolumeSpecification;
 import br.com.amigotradutor.validator.VolumeValidator;
 
 @Service
@@ -48,6 +49,10 @@ public class VolumeService {
 		validator.notExists(t);
 		
 		repository.deleteById(t);
+	}
+
+	public List<Volume> getByParams(String numero, String titulo, Long artigo) {
+		return repository.findAll(VolumeSpecification.filterByArtidoVolumeNumeroTituloPublicacao(numero, titulo, artigo));
 	}
 
 }

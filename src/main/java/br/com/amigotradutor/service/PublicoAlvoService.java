@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.model.GeneroArtigo;
 import br.com.amigotradutor.model.PublicoAlvo;
 import br.com.amigotradutor.repository.interfaces.PublicoAlvoRepository;
+import br.com.amigotradutor.repository.specification.BaseObjetoTipoSpecification;
 import br.com.amigotradutor.validator.PublicoAlvoValidator;
 
 @Service
@@ -18,6 +20,10 @@ public class PublicoAlvoService implements CrudService<PublicoAlvo, Long> {
 	
 	public List<PublicoAlvo> getAll() {
 		return (List<PublicoAlvo>) repository.findAll();
+	}
+	
+	public List<PublicoAlvo> getByParams(String nome) {
+		return repository.findAll(BaseObjetoTipoSpecification.filterByNome(PublicoAlvo.class,nome));
 	}
 	
 	public PublicoAlvo getOne(Long v) throws ValidacaoNegocioException {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Editora;
 import br.com.amigotradutor.repository.interfaces.EditoraRepository;
+import br.com.amigotradutor.repository.specification.EditoraSpecification;
 import br.com.amigotradutor.validator.EditoraValidator;
 
 @Service
@@ -19,6 +20,10 @@ public class EditoraService implements CrudService<Editora, Long> {
 	@Override
 	public List<Editora> getAll() {
 		return (List<Editora>) repository.findAll();
+	}
+	
+	public List<Editora> getByParams(String nome) {
+		return (List<Editora>) repository.findAll(EditoraSpecification.filterByNome(nome));
 	}
 	
 	public Editora getOne(Long id) {

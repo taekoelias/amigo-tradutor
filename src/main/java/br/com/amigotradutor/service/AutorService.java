@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Autor;
 import br.com.amigotradutor.repository.interfaces.AutorRepository;
+import br.com.amigotradutor.repository.specification.AutorSpecification;
 import br.com.amigotradutor.validator.AutorValidator;
 
 @Service
@@ -24,8 +25,8 @@ public class AutorService implements CrudService<Autor,Long>{
 		return autores;
 	}
 	
-	public List<Autor> getAll(String nome) {
-		return dao.findByNomeIgnoreCaseContaining(nome);
+	public List<Autor> getByParams(String nome) {
+		return dao.findAll(AutorSpecification.filterByNome(nome));
 	}
 	
 	@Override
