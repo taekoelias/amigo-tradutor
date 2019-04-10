@@ -2,12 +2,12 @@ package br.com.amigotradutor.repository.interfaces;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 import br.com.amigotradutor.model.Autor;
-import br.com.amigotradutor.model.Revista;
 
-public interface AutorRepository extends CrudRepository<Autor, Long> {
+public interface AutorRepository extends CrudRepository<Autor, Long>, JpaSpecificationExecutor<Autor> {
 
 	List<Autor> findByNome(String nome);
 	

@@ -24,11 +24,10 @@ public class ArtigoController {
 	private ArtigoService service;
 	
 	@GetMapping("/artigos")
-	public List<Artigo> getAll(@RequestParam(name="titulo",required=false) String titulo){
-		if (ValidatorUtil.isNotEmpty(titulo))
-			return service.getAll(titulo);
-		
-		return service.getAll();
+	public List<Artigo> getAllByParams(@RequestParam(required=false) String titulo,
+			@RequestParam(required=false) Long autor, @RequestParam(required=false) Long revista,
+			@RequestParam(required=false) List<Long> generos){
+		return service.getByParams(titulo, autor, revista, generos);
 	}
 	
 	@GetMapping("/artigos/{id}")

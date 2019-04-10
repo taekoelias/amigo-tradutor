@@ -22,11 +22,10 @@ public class RevistaController {
 	private RevistaService service;
 	
 	@RequestMapping("/revistas")
-	public List<Revista> getAllRevistas(@RequestParam(name="nome",required=false) String nome){
-		if (ValidatorUtil.isNotEmpty(nome))
-			return service.getAll(nome);
-		
-		return service.getAll();
+	public List<Revista> getAllRevistas(@RequestParam(required=false) String nome,
+			@RequestParam(required=false) Long editora, @RequestParam(required=false) Long periodicidade,
+			@RequestParam(required=false) List<Long> publicos){
+		return service.getByParams(nome, editora,periodicidade, publicos);
 	}
 	
 	@RequestMapping("/revistas/{id}")

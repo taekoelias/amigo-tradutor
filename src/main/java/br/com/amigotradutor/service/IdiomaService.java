@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Idioma;
 import br.com.amigotradutor.repository.interfaces.IdiomaRepository;
+import br.com.amigotradutor.repository.specification.IdiomaSpecification;
 import br.com.amigotradutor.validator.IdiomaValidator;
 
 @Service
@@ -16,6 +17,10 @@ public class IdiomaService implements CrudService<Idioma, Long>{
 
 	@Autowired
 	private IdiomaRepository repository;
+	
+	public List<Idioma> getByParams(String nome, String sigla){
+		return repository.findAll(IdiomaSpecification.filterByNomeAndSigla(nome, sigla));
+	}
 	
 	@Override
 	public List<Idioma> getAll() {

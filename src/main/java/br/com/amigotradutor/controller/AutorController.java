@@ -22,11 +22,8 @@ public class AutorController {
 	private AutorService service;
 	
 	@RequestMapping("/autores")
-	public List<Autor> getAllAutores(@RequestParam(name="nome",required=false) String nome){
-		if (ValidatorUtil.isNotEmpty(nome))
-			return service.getAll(nome);
-		
-		return service.getAll();
+	public List<Autor> getAllAutores(@RequestParam(required=false) String nome){
+		return service.getByParams(nome);
 	}
 	
 	@RequestMapping("/autores/{id}")

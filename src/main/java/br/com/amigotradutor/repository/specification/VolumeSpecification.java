@@ -13,17 +13,16 @@ import javax.persistence.criteria.Predicate;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.amigotradutor.model.Capitulo;
+import br.com.amigotradutor.model.Volume;
 import br.com.amigotradutor.util.ValidatorUtil;
 
 /**
  *
  * @author taeko
  */
-public class CapituloSpecification{
+public class VolumeSpecification{
 
-    public static Specification<Capitulo> filterByArtidoVolumeNumeroTituloPublicacao(Long artigo, Long volume, 
-    		String numero, String titulo, Date publicacao){
+    public static Specification<Volume> filterByArtidoVolumeNumeroTituloPublicacao(String numero, String titulo, Long artigo){
     	
         return (root, criteriaQuery, criteriaBuilder) ->{
             List<Predicate> predicates = new ArrayList<>();
@@ -32,20 +31,12 @@ public class CapituloSpecification{
                 predicates.add(criteriaBuilder.equal(root.get("artigo"), artigo));
             }
             
-            if (ValidatorUtil.isNotEmpty(volume)){
-                predicates.add(criteriaBuilder.equal(root.get("volume"), volume));
-            }
-            
             if (ValidatorUtil.isNotEmpty(numero)){
                 predicates.add(criteriaBuilder.equal(root.get("numero"), numero));
             }
             
             if (ValidatorUtil.isNotEmpty(titulo)){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("tituloOriginal")), titulo.toUpperCase()));
-            }
-            
-            if (ValidatorUtil.isNotEmpty(publicacao)){
-                predicates.add(criteriaBuilder.equal(root.get("publicacao"), publicacao));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("titulo")), titulo.toUpperCase()));
             }
             
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));

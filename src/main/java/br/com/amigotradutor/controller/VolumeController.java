@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
@@ -25,6 +26,13 @@ public class VolumeController {
 	@GetMapping("/artigos/{idArtigo}/volumes")
 	public List<Volume> getVolumes(@PathVariable long idArtigo){
 		return service.getAll(idArtigo);
+	}
+	
+	@GetMapping("/volumes")
+	public List<Volume> getByParams(@RequestParam(required=false) Long artigo, 
+			@RequestParam(required=false) String numero, 
+			@RequestParam(required=false) String titulo){
+		return service.getByParams(numero, titulo, artigo);
 	}
 	
 	@GetMapping("/artigos/{idArtigo}/volumes/{idVolume}")

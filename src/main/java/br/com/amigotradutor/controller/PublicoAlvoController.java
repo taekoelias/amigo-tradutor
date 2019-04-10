@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.amigotradutor.exception.ValidacaoNegocioException;
@@ -22,8 +23,8 @@ public class PublicoAlvoController {
 	private PublicoAlvoService service;
 	
 	@GetMapping("/publicosAlvo")
-	public List<PublicoAlvo> getGenerosArtigo(){
-		return service.getAll();
+	public List<PublicoAlvo> getGenerosArtigo(@RequestParam(required=false) String nome){
+		return service.getByParams(nome);
 	}
 	
 	@GetMapping("/publicosAlvo/{id}")
