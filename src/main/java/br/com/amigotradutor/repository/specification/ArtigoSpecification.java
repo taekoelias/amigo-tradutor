@@ -17,7 +17,7 @@ public class ArtigoSpecification {
             List<Predicate> predicates = new ArrayList<>();
             
             if (ValidatorUtil.isNotEmpty(titulo)){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("titulo")), titulo.toUpperCase()));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("titulo")), "%"+titulo.toUpperCase()+"%"));
             }
             
             if (ValidatorUtil.isNotEmpty(autor)){
