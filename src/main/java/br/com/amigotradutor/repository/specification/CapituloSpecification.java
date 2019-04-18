@@ -41,7 +41,7 @@ public class CapituloSpecification{
             }
             
             if (ValidatorUtil.isNotEmpty(titulo)){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("tituloOriginal")), titulo.toUpperCase()));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("tituloOriginal")), "%"+titulo.toUpperCase()+"%"));
             }
             
             if (ValidatorUtil.isNotEmpty(publicacao)){

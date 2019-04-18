@@ -36,7 +36,7 @@ public class VolumeSpecification{
             }
             
             if (ValidatorUtil.isNotEmpty(titulo)){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("titulo")), titulo.toUpperCase()));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("titulo")), "%"+titulo.toUpperCase()+"%"));
             }
             
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
