@@ -6,7 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.service.CrudService;
 import br.com.amigotradutor.model.Idioma;
 import br.com.amigotradutor.repository.interfaces.IdiomaRepository;
 import br.com.amigotradutor.repository.specification.IdiomaSpecification;

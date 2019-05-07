@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.service.CrudService;
 import br.com.amigotradutor.model.Revista;
 import br.com.amigotradutor.repository.interfaces.RevistaRepository;
 import br.com.amigotradutor.repository.specification.RevistaSpecification;

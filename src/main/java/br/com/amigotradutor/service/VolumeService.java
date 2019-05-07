@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Volume;
-import br.com.amigotradutor.model.VolumeId;
 import br.com.amigotradutor.repository.interfaces.VolumeRepository;
 import br.com.amigotradutor.repository.specification.VolumeSpecification;
 import br.com.amigotradutor.validator.VolumeValidator;

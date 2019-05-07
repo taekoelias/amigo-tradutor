@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Capitulo;
 import br.com.amigotradutor.repository.interfaces.CapituloRepository;
 import br.com.amigotradutor.repository.interfaces.VolumeRepository;

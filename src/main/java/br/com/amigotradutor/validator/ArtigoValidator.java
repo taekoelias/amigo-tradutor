@@ -1,11 +1,12 @@
 package br.com.amigotradutor.validator;
 
-import br.com.amigotradutor.exception.EntidadeNaoExistenteException;
-import br.com.amigotradutor.exception.EntidadeUnicaExistenteException;
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.EntidadeNaoExistenteException;
+import br.com.amigotradutor.common.exception.EntidadeUnicaExistenteException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.util.ValidatorUtil;
+import br.com.amigotradutor.common.validator.BaseValidator;
 import br.com.amigotradutor.model.Artigo;
 import br.com.amigotradutor.repository.interfaces.ArtigoRepository;
-import br.com.amigotradutor.util.ValidatorUtil;
 
 public class ArtigoValidator implements BaseValidator<Artigo, Long> {
 
@@ -15,7 +16,6 @@ public class ArtigoValidator implements BaseValidator<Artigo, Long> {
 		this.repository = repository;
 	}
 	
-	@Override
 	public void requiredField(Artigo obj) throws ValidacaoNegocioException {
 		
 		if (ValidatorUtil.isEmpty(obj) || ValidatorUtil.isEmpty(obj.getTitulo()) 
@@ -24,7 +24,6 @@ public class ArtigoValidator implements BaseValidator<Artigo, Long> {
 			throw new ValidacaoNegocioException("Dados obrigatórios do Artigo não foram informados.");
 	}
 
-	@Override
 	public void duplicated(Artigo obj) throws ValidacaoNegocioException {
 		requiredField(obj);
 		
@@ -34,7 +33,6 @@ public class ArtigoValidator implements BaseValidator<Artigo, Long> {
 
 	}
 
-	@Override
 	public void notExists(Long id) throws ValidacaoNegocioException {
 		
 		if (!repository.existsById(id))

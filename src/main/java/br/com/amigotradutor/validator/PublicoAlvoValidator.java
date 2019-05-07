@@ -1,8 +1,9 @@
 package br.com.amigotradutor.validator;
 
-import br.com.amigotradutor.exception.EntidadeNaoExistenteException;
-import br.com.amigotradutor.exception.EntidadeUnicaExistenteException;
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.EntidadeNaoExistenteException;
+import br.com.amigotradutor.common.exception.EntidadeUnicaExistenteException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.validator.BaseValidator;
 import br.com.amigotradutor.model.PublicoAlvo;
 import br.com.amigotradutor.repository.interfaces.PublicoAlvoRepository;
 

@@ -2,12 +2,13 @@ package br.com.amigotradutor.validator;
 
 import java.util.List;
 
-import br.com.amigotradutor.exception.EntidadeNaoExistenteException;
-import br.com.amigotradutor.exception.EntidadeUnicaExistenteException;
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.EntidadeNaoExistenteException;
+import br.com.amigotradutor.common.exception.EntidadeUnicaExistenteException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.util.ValidatorUtil;
+import br.com.amigotradutor.common.validator.BaseValidator;
 import br.com.amigotradutor.model.Revista;
 import br.com.amigotradutor.repository.interfaces.RevistaRepository;
-import br.com.amigotradutor.util.ValidatorUtil;
 
 public class RevistaValidator implements BaseValidator<Revista, Long> {
 

@@ -7,8 +7,8 @@ import javax.persistence.criteria.Predicate;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import br.com.amigotradutor.common.util.ValidatorUtil;
 import br.com.amigotradutor.model.Revista;
-import br.com.amigotradutor.util.ValidatorUtil;
 
 public class RevistaSpecification {
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.amigotradutor.repository.specification;
 
 import java.util.ArrayList;
@@ -13,8 +8,8 @@ import javax.persistence.criteria.Predicate;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import br.com.amigotradutor.common.util.ValidatorUtil;
 import br.com.amigotradutor.model.Capitulo;
-import br.com.amigotradutor.util.ValidatorUtil;
 
 /**
  *

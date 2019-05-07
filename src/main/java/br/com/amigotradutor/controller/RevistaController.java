@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.amigotradutor.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.model.Revista;
 import br.com.amigotradutor.service.RevistaService;
-import br.com.amigotradutor.util.ValidatorUtil;
 
 @RestController
 public class RevistaController {
